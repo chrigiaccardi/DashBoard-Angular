@@ -1,10 +1,27 @@
+<mat-toolbar color="primary">
+    <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button matIconButton class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
+
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
         <mat-list role="list">
-            <mat-list-item role="listitem">Pagina 1</mat-list-item>
-            <mat-list-item role="listitem">Pagina 2</mat-list-item>
-            <mat-list-item role="listitem">Pagina 3</mat-list-item>
+            <mat-list-item role="listitem" routerLink="pagina1" [routerLinkActive]="'attivo'">Pagina 1</mat-list-item>
+            <mat-list-item role="listitem" routerLink="pagina2" [routerLinkActive]="'attivo'">Pagina 2</mat-list-item>
+            <mat-list-item role="listitem" routerLink="pagina3" [routerLinkActive]="'attivo'">Pagina 3</mat-list-item>
         </mat-list>
     </mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
+    <mat-drawer-content>
+        <router-outlet> </router-outlet>
+    </mat-drawer-content>
 </mat-drawer-container>
+
