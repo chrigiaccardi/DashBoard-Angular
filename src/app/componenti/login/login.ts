@@ -3,6 +3,7 @@ import { FormsModule, NgForm, } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../service/auth/auth-service';
 
 
 @Component({
@@ -13,10 +14,16 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login.css',
 })
 export class Login {
-
+  constructor(private authService: AuthService) { }
+  
   onSubmit(form: NgForm) {
     const email = form.value.email
     const password = form.value.password
-    // chiamare auth service
+    this.authService.login(email, password).subscribe((data: any) => {
+      const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000)
+      this.authService.creaUser(data.email, data.localId, data.idToken, expirationDate)
+      localStorage.setItem('user', JSON.stringify(this.authService.user))
+    })
+    form.reset
   }
 }

@@ -1,13 +1,23 @@
-<h1>Registrazione Utente</h1>
+<section>
+    <h1>Registrazione Utente</h1>
 
-<form #registrazioneForm="ngForm" (click)="onSubmit(registrazioneForm)">
-    <mat-form-field>
-        <mat-label>Input</mat-label>
-        <input matInput name="email" type="email" autocomplete="username" ngModel required>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Input</mat-label>
-        <input matInput name="password" type="password" autocomplete="new-password" required>
-    </mat-form-field>
-    <button matButton="tonal" type="submit" [disabled]="!registrazioneForm.valid">Basic</button>
-</form>
+    <form #registrazioneForm="ngForm" (ngSubmit)="onSubmit(registrazioneForm)">
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" name="nome" autocomplete="given-name" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cognome</mat-label>
+            <input matInput type="text" name="cognome" autocomplete="family-name" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+                <input matInput name="email" type="email" autocomplete="username" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+                <input matInput name="password" type="password" autocomplete="new-password" ngModel required>
+        </mat-form-field>
+        <button matButton="tonal" type="submit" [disabled]="!registrazioneForm.valid">Basic</button>
+    </form>
+</section>

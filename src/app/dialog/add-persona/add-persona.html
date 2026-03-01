@@ -1,0 +1,15 @@
+<h2 mat-dialog-title> Aggiungi Invitato </h2>
+
+<mat-dialog-content>
+<form #addPersona="ngForm" (ngSubmit)="onSubmit(addPersona)">
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput name="nome" type="text"  ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Cognome</mat-label>
+        <input matInput name="cognome" type="text"  ngModel required>
+    </mat-form-field>
+    <button matButton="tonal" type="submit" [disabled]="!addPersona.valid" [mat-dialog-close]="true">Aggiungi</button>
+</form>
+</mat-dialog-content>
