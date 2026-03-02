@@ -31,6 +31,7 @@ export class Pagina1 implements OnInit{
       const arr = Object.keys(data).map(key => { return { id: key, ...data[key] } })
       console.log('Invitati Caricati', arr)
       this.arrayInvitati.persone = arr;
+      this.dataSource.data = arr;
     })
   }
 }

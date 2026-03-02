@@ -7,14 +7,14 @@ import { User } from '../../models/user';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(private http: HttpClient, private router: Router) { }
   isLoggedIn: boolean = false
-  API_KEY: string = 'AIzaSyDfVNFpZzn7xmRlSlV3e-WRUNVmoIqguEg'
+  API_KEY: string = 'key'
   loginURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`;
   registrazioneURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`;
   user: User | null = null
 
-  creaUser(email: string, id:string, token: string, expirationDate:Date) {
+  creaUser(email: string, id: string, token: string, expirationDate: Date) {
     this.user = new User(email, id, token, expirationDate)
     this.isLoggedIn = true
   }
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   registrazione(email: string, password: string) {
-    return this.http.post(this.registrazioneURL,{email: email, password: password, returnSecureToken:true})
+    return this.http.post(this.registrazioneURL, { email: email, password: password, returnSecureToken: true })
   }
 
   logout() {
@@ -36,4 +36,14 @@ export class AuthService {
     console.log('logout eseguito')
   }
 
+  autoLogin() {
+    const userData = localStorage.getItem('user');
+    if (!userData) {
+      return
+    }
+    const datiUtente = JSON.parse(userData)
+    
+    const user = new User(datiUtente.email, datiUtente.id, datiUtente._token, new Date(datiUtente._expirationDate))
+    this.user = user
+  }
 }
