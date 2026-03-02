@@ -10,7 +10,8 @@ constructor(private authService: AuthService, private http: HttpClient){}
 
   urlListaInvitati: string = 'https://lista-invitati-b2d59-default-rtdb.europe-west1.firebasedatabase.app/lista-invitati'
   urlListaInvitatiJson: string = `${this.urlListaInvitati}.json`
-
+  
+  
   inserisciPersona(url: string, body: {}) {
     return this.http.post(`${url}?auth=${this.authService.user?.token}`,body)
   }
@@ -18,7 +19,7 @@ constructor(private authService: AuthService, private http: HttpClient){}
     return this.http.get(`${url}?auth=${this.authService.user?.token}`)
   }
   deletePersona(url: string, id: string) {
-    return this.http.delete(`${url}/${id}.json`)
+    return this.http.delete(`${url}/${id}.json?auth=${this.authService.user?.token}`)
   }
-
+  
 }

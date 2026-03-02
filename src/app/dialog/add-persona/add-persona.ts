@@ -15,14 +15,14 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './add-persona.css',
 })
 export class AddPersona {
-  constructor(private firebaseDB: Firebase){}
+  constructor(private firebase: Firebase,){}
 
   onSubmit(form: NgForm) {
-    this.firebaseDB.inserisciPersona(this.firebaseDB.urlListaInvitatiJson, {
+    this.firebase.inserisciPersona(this.firebase.urlListaInvitatiJson, {
      nome: form.value.nome,
      cognome: form.value.cognome,
     }).subscribe(data => {
-     console.log('Aggiunto', data)
+      console.log('Persona Aggiunta')
    })
 }
 

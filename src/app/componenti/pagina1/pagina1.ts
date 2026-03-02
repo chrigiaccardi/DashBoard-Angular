@@ -19,20 +19,33 @@ import { MatTableDataSource } from '@angular/material/table';
 export class Pagina1 implements OnInit{
   constructor(private dialog: MatDialog, private firebase: Firebase, private arrayInvitati: ArrayInvitati) { }
   dataSource = new MatTableDataSource()
-  displayedColumns = ['nome', 'cognome']
+  displayedColumns = ['nome', 'cognome', 'elimina'];
+
+  caricaInvitati() {
+     this.firebase.getPersona(this.firebase.urlListaInvitatiJson).subscribe((data: any) => {
+      const arr = Object.keys(data).map(key => { return { id: key, ...data[key] } })
+       console.log('Invitati Caricati', arr)
+       this.arrayInvitati.persone = arr;
+       this.dataSource.data = arr;
+  })
+  }
+
+  deletePersona(id:string) {
+    this.firebase.deletePersona(this.firebase.urlListaInvitati, id).subscribe(() => {
+      console.log('Persona Eliminata')
+      this.caricaInvitati();
+    })
+  }
 
   apriDialog() {
-    this.dialog.open(AddPersona)
-    console.log('click bottone +')
+    const dialogRef = this.dialog.open(AddPersona)
+    dialogRef.afterClosed().subscribe(() => {
+      this.caricaInvitati()
+    })
   }
 
   ngOnInit(): void{
-    this.firebase.getPersona(this.firebase.urlListaInvitatiJson).subscribe((data: any) => {
-      const arr = Object.keys(data).map(key => { return { id: key, ...data[key] } })
-      console.log('Invitati Caricati', arr)
-      this.arrayInvitati.persone = arr;
-      this.dataSource.data = arr;
-    })
+    this.caricaInvitati();
   }
 }
 
