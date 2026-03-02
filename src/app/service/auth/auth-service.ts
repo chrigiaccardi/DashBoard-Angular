@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router){}
   isLoggedIn: boolean = false
-  API_KEY: string = 'key'
+  API_KEY: string = 'AIzaSyDfVNFpZzn7xmRlSlV3e-WRUNVmoIqguEg'
   loginURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`;
   registrazioneURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`;
   user: User | null = null
@@ -35,4 +35,5 @@ export class AuthService {
     this.user = null
     console.log('logout eseguito')
   }
+
 }

@@ -24,8 +24,8 @@ export class Login {
       const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000)
       this.authService.creaUser(data.email, data.localId, data.idToken, expirationDate)
       localStorage.setItem('user', JSON.stringify(this.authService.user))
-    })
     form.reset()
-    this.router.navigate(['pagina1'])
+      this.router.navigate(['pagina1'])
+    })
   }
 }

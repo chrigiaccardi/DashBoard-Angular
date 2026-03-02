@@ -28,9 +28,9 @@ export class Pagina1 implements OnInit{
 
   ngOnInit(): void{
     this.firebase.getPersona(this.firebase.urlListaInvitatiJson).subscribe((data: any) => {
-      this.dataSource.data = Object.keys(data).map(key => { return { id: key, ...data[key] } })
-      console.log('Invitati Caricati', this.dataSource.data)
-      this.arrayInvitati.persone = this.dataSource.data
+      const arr = Object.keys(data).map(key => { return { id: key, ...data[key] } })
+      console.log('Invitati Caricati', arr)
+      this.arrayInvitati.persone = arr;
     })
   }
 }
