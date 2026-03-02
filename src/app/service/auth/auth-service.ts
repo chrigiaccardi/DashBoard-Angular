@@ -8,8 +8,8 @@ import { User } from '../../models/user';
 })
 export class AuthService {
   constructor(private http: HttpClient, private router: Router){}
-  isLoggedIn: boolean = true;
-  API_KEY: string = 'chiave'
+  isLoggedIn: boolean = false
+  API_KEY: string = 'key'
   loginURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`;
   registrazioneURL: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`;
   user: User | null = null

@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddPersona } from '../../dialog/add-persona/add-persona';
 import { Firebase } from '../../service/firebase';
 import { ArrayInvitati } from '../../service/array-invitati';
-
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { ArrayInvitati } from '../../service/array-invitati';
 })
 export class Pagina1 implements OnInit{
   constructor(private dialog: MatDialog, private firebase: Firebase, private arrayInvitati: ArrayInvitati) { }
-  persone: any[] = []
+  dataSource = new MatTableDataSource()
   displayedColumns = ['nome', 'cognome']
 
   apriDialog() {
@@ -28,9 +28,9 @@ export class Pagina1 implements OnInit{
 
   ngOnInit(): void{
     this.firebase.getPersona(this.firebase.urlListaInvitatiJson).subscribe((data: any) => {
-      this.persone = Object.keys(data).map(key => { return { id: key, ...data[key] } })
-      console.log('Invitati Caricati',this.persone)
-      this.arrayInvitati.persone = this.persone
+      this.dataSource.data = Object.keys(data).map(key => { return { id: key, ...data[key] } })
+      console.log('Invitati Caricati', this.dataSource.data)
+      this.arrayInvitati.persone = this.dataSource.data
     })
   }
 }
